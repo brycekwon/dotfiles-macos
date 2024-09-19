@@ -1,0 +1,51 @@
+{
+  "timeStamp": 1726589867081,
+  "version": "1.59.0",
+  "userSettings": {
+    "advancedUserEnabled": true,
+    "contextMenuEnabled": false,
+    "externalLists": "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt",
+    "ignoreGenericCosmeticFilters": true,
+    "importedLists": [
+      "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
+    ],
+    "largeMediaSize": 500,
+    "popupPanelSections": 31,
+    "showIconBadge": false,
+    "tooltipsDisabled": true
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-quick-fixes",
+    "ublock-unbreak",
+    "easylist",
+    "easyprivacy",
+    "block-lan",
+    "urlhaus-1",
+    "curben-phishing",
+    "plowe-0",
+    "dpollock-0",
+    "fanboy-cookiemonster",
+    "ublock-cookies-easylist",
+    "fanboy-social",
+    "fanboy-thirdparty_social",
+    "easylist-chat",
+    "easylist-newsletters",
+    "easylist-notifications",
+    "easylist-annoyances",
+    "ublock-annoyances",
+    "https://raw.githubusercontent.com/DandelionSprout/adfilt/master/LegitimateURLShortener.txt"
+  ],
+  "hiddenSettings": {},
+  "whitelist": [
+    "chrome-extension-scheme",
+    "moz-extension-scheme"
+  ],
+  "dynamicFilteringString": "",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "no-csp-reports: * true",
+  "userFilters": "*###credential_picker_container"
+}

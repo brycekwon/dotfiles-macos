@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+
+# ensure firefox is closed before executing
+if pgrep -x "firefox" > /dev/null; then
+    echo "Firefox is currently running."
+    read -p "Do you want to close Firefox? (y/n): " choice
+
+    if [[ "$choice" == "y" || "$choice" == "Y" ]]; then
+        echo "Closing Firefox..."
+        pkill -x "firefox"
+        echo "Firefox has been closed."
+    else
+        echo "Exiting..."
+        exit 0
+    fi
+fi
+
+# check all prerequisite values are defined
+if [[ -z "$FIREFOX_PROFILES" || ! -d "$FIREFOX_PROFILES" ]]; then
+    echo "Error: FIREFOX_PROFILES is not set or not a directory."
+    exit 1
+fi
+
+# determine which script should be run
+if [[ "$1" == "-p" ]]; then
+    script="prefsCleaner.sh"
+    flags=""
+else
+    script="updater.sh"
+    flags="-o $DOTFILES/settings/firefox/user-overrides.js"
+fi
+
+# find all paths compatable with the arkenfox setup
+declare -a profile_names
+declare -a profile_paths
+for profile in "$FIREFOX_PROFILES"/*; do
+    if [[ -d "$profile" && -f "$profile/$script" ]]; then
+        profile_names+=("$(basename "$profile")")
+        profile_paths+=("$(realpath "$profile/$script")")
+    fi
+done
+
+if [[ ${#profile_paths[@]} -eq 0 ]]; then
+    echo "No $script files were found in any profile directories."
+    exit 0
+fi
+
+# prompt for user input to select which profile to update/clean
+echo "Available profiles:"
+for i in "${!profile_names[@]}"; do
+    echo "$((i+1)). ${profile_names[i]}"
+done
+
+echo ""
+read -p "Enter the number for the corresponding profile you want to execute: " choice
+if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "${#profile_names[@]}" ]; then
+    echo "Error: Invalid input. Please enter a number between 1 and ${#profile_names[@]}."
+    exit 1
+fi
+
+# run the selected script
+selected_script="${profile_paths[$((choice - 1))]}"
+echo "Executing $script for profile: ${profile_names[$((choice - 1))]}"
+$selected_script $flags
