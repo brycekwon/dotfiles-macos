@@ -13,6 +13,7 @@
 .stowrc
 
 Brewfile
+Makefile
 scripts
 settings
 \_archive

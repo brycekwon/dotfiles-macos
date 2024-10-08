@@ -6,7 +6,7 @@ check_homebrew:
 	@command -v brew >/dev/null 2>&1 && { \
 		echo "Homebrew is already installed."; \
 		exit 0; \
-	}
+		}
 
 # Install Homebrew
 install_homebrew: check_homebrew
@@ -17,7 +17,7 @@ install_homebrew: check_homebrew
 add_to_shell:
 	@echo "Adding Homebrew to your current shell environment..."
 	@eval "$(/opt/homebrew/bin/brew shellenv)" && \
-	echo "Homebrew has been added to your current session."
+		echo "Homebrew has been added to your current session."
 
 # Install Brewfile
 install_brewfile:

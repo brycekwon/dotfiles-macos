@@ -46,6 +46,7 @@ PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/gnu-sed/libexec/gnubin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
+PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 PATH="$HOMEBREW_PREFIX/opt/less/bin:$PATH"
 PATH="$XDG_BIN_HOME:$PATH"
 export PATH
@@ -76,8 +77,8 @@ bindkey '^[[B' history-search-forward
 ##################################################
 
 HISTFILE="$XDG_DATA_HOME/zsh/history"
-HISTSIZE=500
-SAVEHIST=500
+HISTSIZE=1000
+SAVEHIST=1000
 
 setopt appendhistory
 setopt sharehistory
@@ -113,11 +114,11 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 ##################################################
 
 # ensure the zit plugin manager is installed
-export ZIT_MODULES_HOME="$XDG_DATA_HOME/zsh/plugins"
-if [[ ! -r "$ZIT_MODULES_HOME/zit/zit.zsh" ]]; then
-    git clone --depth 1 -- "https://github.com/brycekwon/zit.git" "$ZIT_MODULES_HOME/zit"
+export ZIT_HOME="$XDG_DATA_HOME/zsh/plugins"
+if [[ ! -r "$ZIT_HOME/zit/zit.zsh" ]]; then
+    git clone --depth 1 -- "https://github.com/brycekwon/zit.git" "$ZIT_HOME/zit"
 fi
-source "$ZIT_MODULES_HOME/zit/zit.zsh"
+source "$ZIT_HOME/zit/zit.zsh"
 
 zit-install "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting.git"
 zit-load "zsh-syntax-highlighting" "zsh-syntax-highlighting.plugin.zsh"
@@ -133,7 +134,7 @@ zit-load "pure" "pure.zsh"
 # Zsh Pure Theme                                 #
 ##################################################
 
-fpath+=("$ZIT_MODULES_HOME/pure")
+fpath+=("$ZIT_HOME/pure")
 autoload -U promptinit; promptinit
 
 PURE_GIT_PULL=0
