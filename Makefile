@@ -1,32 +1,30 @@
-# Homebrew installation script URL
-HOMEBREW_INSTALL_URL = https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+BREW := /opt/homebrew/bin/brew
+BREWFILE := ./Brewfile
 
-# Check if Homebrew is already installed
-check_homebrew:
-	@command -v brew >/dev/null 2>&1 && { \
-		echo "Homebrew is already installed."; \
-		exit 0; \
-		}
+.PHONY: all install_brew install_packages stow
 
-# Install Homebrew
-install_homebrew: check_homebrew
-	@echo "Installing Homebrew..."
-	/bin/bash -c "$(curl -fsSL $(HOMEBREW_INSTALL_URL))"
+all: install_brew install_packages stow
 
-# Add Homebrew to current shell environment
-add_to_shell:
-	@echo "Adding Homebrew to your current shell environment..."
-	@eval "$(/opt/homebrew/bin/brew shellenv)" && \
-		echo "Homebrew has been added to your current session."
+# Check if Homebrew is installed
+install_brew:
+	@echo "Checking if Homebrew is installed..."
+	@if ! command -v $(BREW) >/dev/null 2>&1; then \
+		echo "Homebrew not found. Installing..."; \
+		/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; \
+	fi
+	@echo "Sourcing Homebrew..."
+	@eval "$$($(BREW) shellenv)"
 
-# Install Brewfile
-install_brewfile:
-	@echo "Installing Brewfile..."
-	@brew bundle --file=Brewfile
+# Install packages from Brewfile
+install_packages:
+	@echo "Installing packages from Brewfile..."
+	@if [ -f $(BREWFILE) ]; then \
+		$(BREW) bundle --file=$(BREWFILE); \
+	else \
+		echo "No Brewfile found."; \
+	fi
 
-# Run all steps
-all: install_homebrew add_to_shell install_brewfile
-	@echo "Homebrew installation complete."
-	@stow .
-
-.PHONY: all check_homebrew install_homebrew add_to_shell install_brewfile
+# Run stow command
+stow:
+	@echo "Running stow command..."
+	stow .

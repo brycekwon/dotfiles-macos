@@ -9,3 +9,9 @@ user_pref("browser.urlbar.suggest.engines", false);
 
 /* causing issues with accessing websites */
 user_pref("security.OCSP.require", false);
+
+/* https://make-firefox-private-again.com/ */
+user_pref("dom.private-attribution.submission.enabled", false);
+
+/* disable pocket extension */
+user_pref("extensions.pocket.enabled", false);

@@ -56,3 +56,6 @@ luac.out
 # Zunit tests' output
 /tests/_output/*
 !/tests/_output/.gitkeep
+
+# custom project structure #
+_builds

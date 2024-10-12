@@ -13,7 +13,9 @@
 .stowrc
 
 Brewfile
+Brewfile.lock.json
 Makefile
 scripts
 settings
 \_archive
+\_builds
