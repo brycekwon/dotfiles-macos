@@ -1,0 +1,11 @@
+{
+	"auths": {},
+	"psFormat": "table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Ports}}\t{{.Status}}",
+	"currentContext": "colima",
+	"cliPluginsExtraDirs": [
+		"/opt/homebrew/lib/docker/cli-plugins"
+	],
+	"aliases": {
+		"builder": "buildx"
+	}
+}
